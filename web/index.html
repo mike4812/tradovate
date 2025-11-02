@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tradovate Multi-Account Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">📊 Tradovate Manager</h1>
+                <nav class="nav">
+                    <a href="#dashboard" class="nav-link active">דשבורד</a>
+                    <a href="#accounts" class="nav-link">חשבונות</a>
+                    <a href="#positions" class="nav-link">פוזיציות</a>
+                    <a href="#orders" class="nav-link">הזמנות</a>
+                    <a href="#settings" class="nav-link">הגדרות</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- Connection Status -->
+            <section class="connection-panel">
+                <div class="status-badge" id="connectionStatus">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">מנותק</span>
+                </div>
+                <button class="btn btn-primary" id="connectBtn">התחבר לכל החשבונות</button>
+                <button class="btn btn-secondary" id="refreshBtn" disabled>רענן נתונים</button>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <h2 class="section-title">סקירה כללית</h2>
+                
+                <!-- Summary Cards -->
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <div class="card-icon">💰</div>
+                        <div class="card-content">
+                            <h3 class="card-title">יתרה כוללת</h3>
+                            <div class="card-value" id="totalBalance">$0.00</div>
+                            <div class="card-subtitle">בכל החשבונות</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon">👥</div>
+                        <div class="card-content">
+                            <h3 class="card-title">חשבונות מחוברים</h3>
+                            <div class="card-value" id="connectedAccounts">0</div>
+                            <div class="card-subtitle">מתוך <span id="totalAccounts">0</span></div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon">📈</div>
+                        <div class="card-content">
+                            <h3 class="card-title">פוזיציות פתוחות</h3>
+                            <div class="card-value" id="totalPositions">0</div>
+                            <div class="card-subtitle">בכל החשבונות</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon">📋</div>
+                        <div class="card-content">
+                            <h3 class="card-title">הזמנות פעילות</h3>
+                            <div class="card-value" id="totalOrders">0</div>
+                            <div class="card-subtitle">ממתינות לביצוע</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Analysis -->
+                <div class="risk-panel">
+                    <h3 class="panel-title">ניתוח סיכונים</h3>
+                    <div class="risk-grid">
+                        <div class="risk-item risk-low">
+                            <span class="risk-label">סיכון נמוך</span>
+                            <span class="risk-count" id="lowRiskCount">0</span>
+                        </div>
+                        <div class="risk-item risk-medium">
+                            <span class="risk-label">סיכון בינוני</span>
+                            <span class="risk-count" id="mediumRiskCount">0</span>
+                        </div>
+                        <div class="risk-item risk-high">
+                            <span class="risk-label">סיכון גבוה</span>
+                            <span class="risk-count" id="highRiskCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accounts Section -->
+            <section id="accounts" class="section">
+                <h2 class="section-title">רשימת חשבונות</h2>
+                <div id="accountsList" class="accounts-grid">
+                    <!-- Accounts will be populated here -->
+                    <div class="empty-state">
+                        <div class="empty-icon">🔌</div>
+                        <p>התחבר כדי לראות את החשבונות</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Positions Section -->
+            <section id="positions" class="section">
+                <h2 class="section-title">פוזיציות פתוחות</h2>
+                <div id="positionsList" class="data-table-container">
+                    <div class="empty-state">
+                        <div class="empty-icon">📊</div>
+                        <p>אין פוזיציות פתוחות</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="orders" class="section">
+                <h2 class="section-title">הזמנות פעילות</h2>
+                <div id="ordersList" class="data-table-container">
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <p>אין הזמנות פעילות</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="section">
+                <h2 class="section-title">הגדרות</h2>
+                <div class="settings-panel">
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox" id="autoRefresh">
+                            <span>רענון אוטומטי</span>
+                        </label>
+                        <p class="setting-description">רענן את הנתונים כל 30 שניות</p>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox" id="soundAlerts">
+                            <span>התראות קוליות</span>
+                        </label>
+                        <p class="setting-description">השמע צליל כאשר יש שינוי בחשבון</p>
+                    </div>
+
+                    <div class="setting-item">
+                        <label class="setting-label">סביבה:</label>
+                        <select id="environmentSelect" class="setting-select">
+                            <option value="demo" selected>Demo</option>
+                            <option value="live">Live</option>
+                        </select>
+                        <p class="setting-description">⚠️ זהירות! Live mode משפיע על חשבונות אמיתיים</p>
+                    </div>
+
+                    <div class="setting-item">
+                        <button class="btn btn-danger" id="disconnectBtn" disabled>התנתק מכל החשבונות</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tradovate Multi-Account Manager | Made with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>מתחבר לחשבונות...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
