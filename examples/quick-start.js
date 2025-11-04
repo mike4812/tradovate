@@ -16,12 +16,12 @@ async function main() {
   // Add your accounts
   manager.addAccount({
     accountName: 'My First Account',
-    username: 'demo_user',
-    password: 'demo_password',
+    username: 'MikeZalivanskii47',
+    password: 'L5168V5980N8440tv==',
     appId: 'Sample App',
     appVersion: '1.0',
-    cid: 'YOUR_CID',
-    sec: 'YOUR_SECRET'
+    cid: '',
+    sec: ''
   });
 
   try {
